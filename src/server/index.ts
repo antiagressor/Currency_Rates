@@ -8,7 +8,7 @@ const port = 3000;
 let exchangeRates: any = {};
 let lastUpdated: string = '';
 
-// Функция для получения курсов валют
+// Function for retrieving currency rates
 const fetchExchangeRates = async () => {
     try {
         const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
@@ -19,15 +19,15 @@ const fetchExchangeRates = async () => {
     }
 };
 
-// Начальное получение курсов валют
+// Retrieving currency rates
 fetchExchangeRates();
 
-// Маршрут для получения текущих курсов валют
+// Route for retrieving the current currency rates
 app.get('/api/rates', (req: Request, res: Response) => {
     res.json({ exchangeRates, lastUpdated });
 });
 
-// Статические файлы (для HTML-страницы)
+// Static files (for HTML-page)
 app.use(express.static(path.join(__dirname, '../../dist/public')));
 
 app.listen(port, () => {
